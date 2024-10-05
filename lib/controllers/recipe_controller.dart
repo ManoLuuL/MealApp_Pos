@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:mealdb_app/models/recipe.dart';
 
 class RecipeController {
-  static const String apiUrl =
-      'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  String apiUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
   Future<List<Recipe>> fetchRecipes(String query) async {
     final response = await http.get(Uri.parse('$apiUrl$query'));

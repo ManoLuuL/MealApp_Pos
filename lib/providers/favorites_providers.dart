@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mealdb_app/models/recipe.dart';
 
-class FavoritesController extends ChangeNotifier {
-  List<Recipe> _favoriteRecipes = [];
+class FavoritesProvider extends ChangeNotifier {
+  final List<Recipe> _favoriteRecipes = [];
 
   List<Recipe> get favoriteRecipes => _favoriteRecipes;
 

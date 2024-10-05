@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mealdb_app/controllers/category_controller.dart';
 import 'package:mealdb_app/models/category.dart';
-import 'category_recipes_view.dart';
+import 'categories_recipes_view.dart';
 
 class CategoriesView extends StatefulWidget {
+  const CategoriesView({super.key});
+
   @override
-  _CategoriesViewState createState() => _CategoriesViewState();
+  State<CategoriesView> createState() => _CategoriesViewState();
 }
 
 class _CategoriesViewState extends State<CategoriesView> {
@@ -30,7 +32,6 @@ class _CategoriesViewState extends State<CategoriesView> {
       setState(() {
         isLoading = false;
       });
-      // Tratar erro
     }
   }
 
@@ -38,12 +39,12 @@ class _CategoriesViewState extends State<CategoriesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
-              padding: EdgeInsets.all(8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.all(8),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 3 / 2,
+                childAspectRatio: 1.1,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
               ),
@@ -67,16 +68,20 @@ class _CategoriesViewState extends State<CategoriesView> {
                         Expanded(
                           child: Image.network(
                             category.thumbnail,
-                            fit: BoxFit.cover,
+                            height: 120,
                             width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             category.name,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ],

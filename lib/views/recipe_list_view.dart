@@ -4,8 +4,10 @@ import 'package:mealdb_app/models/recipe.dart';
 import 'recipe_details_view.dart';
 
 class RecipeListView extends StatefulWidget {
+  const RecipeListView({super.key});
+
   @override
-  _RecipeListViewState createState() => _RecipeListViewState();
+  State<RecipeListView> createState() => _RecipeListViewState();
 }
 
 class _RecipeListViewState extends State<RecipeListView> {
@@ -22,15 +24,18 @@ class _RecipeListViewState extends State<RecipeListView> {
   void fetchRecipes() async {
     try {
       List<Recipe> fetchedRecipes = await controller.fetchRecipes('');
-      setState(() {
-        recipes = fetchedRecipes;
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          recipes = fetchedRecipes;
+          isLoading = false;
+        });
+      }
     } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
-      // Tratar erro
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -38,12 +43,12 @@ class _RecipeListViewState extends State<RecipeListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
-              padding: EdgeInsets.all(8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.all(8),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.75,
+                childAspectRatio: 1.1,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
               ),
@@ -54,13 +59,15 @@ class _RecipeListViewState extends State<RecipeListView> {
                   onTap: () async {
                     Recipe fullRecipe =
                         await controller.fetchRecipeDetails(recipe.id);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            RecipeDetailsView(recipe: fullRecipe),
-                      ),
-                    );
+                    if (mounted) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              RecipeDetailsView(recipe: fullRecipe),
+                        ),
+                      );
+                    }
                   },
                   child: Card(
                     elevation: 4,
@@ -69,16 +76,19 @@ class _RecipeListViewState extends State<RecipeListView> {
                         Expanded(
                           child: Image.network(
                             recipe.imageUrl,
-                            fit: BoxFit.cover,
+                            height: 120,
                             width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             recipe.name,
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ),

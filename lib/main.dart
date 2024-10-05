@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mealdb_app/controllers/favorites_controller.dart';
+import 'package:mealdb_app/providers/favorites_providers.dart';
 import 'package:mealdb_app/views/recipe_list_view.dart';
 import 'package:mealdb_app/views/favorites_view.dart';
-import 'package:mealdb_app/views/category_view.dart';
+import 'package:mealdb_app/views/categories_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => FavoritesController(),
+      create: (_) => FavoritesProvider(),
       child: MyApp(),
     ),
   );
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MealDB App',
+      title: 'MealApp',
       theme: ThemeData(
         primarySwatch: Colors.red,
         fontFamily: 'Roboto',
@@ -36,10 +36,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
+  static const List<String> _titles = ['Receitas', 'Categorias', 'Favoritos'];
+
   static List<Widget> _screens = <Widget>[
-    RecipeListView(), // Tela de listagem de receitas
-    CategoriesView(), // Tela de categorias
-    FavoritesView(), // Tela de favoritos
+    RecipeListView(),
+    CategoriesView(),
+    FavoritesView(),
   ];
 
   void _onItemTapped(int index) {
@@ -48,13 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  List<String> _titles = ['Receitas', 'Categorias', 'Favoritos'];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_titles[_selectedIndex]),
+        title: Text('MealApp - ${_titles[_selectedIndex]}'),
       ),
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

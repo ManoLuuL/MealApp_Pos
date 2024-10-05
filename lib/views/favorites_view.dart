@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mealdb_app/providers/favorites_providers.dart';
 import 'package:provider/provider.dart';
-import 'package:mealdb_app/controllers/favorites_controller.dart';
 import 'package:mealdb_app/models/recipe.dart';
 import 'recipe_details_view.dart';
 
 class FavoritesView extends StatelessWidget {
+  const FavoritesView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var favorites = Provider.of<FavoritesController>(context).favoriteRecipes;
+    var favorites = Provider.of<FavoritesProvider>(context).favoriteRecipes;
 
     return Scaffold(
       body: favorites.isEmpty
-          ? Center(child: Text('Nenhuma receita favoritada'))
+          ? const Center(child: Text('Nenhuma receita favoritada'))
           : GridView.builder(
-              padding: EdgeInsets.all(8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.all(8),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.75,
+                childAspectRatio: 1.1,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
               ),
@@ -39,16 +41,17 @@ class FavoritesView extends StatelessWidget {
                         Expanded(
                           child: Image.network(
                             recipe.imageUrl,
-                            fit: BoxFit.cover,
+                            height: 120,
                             width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             recipe.name,
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
                         ),

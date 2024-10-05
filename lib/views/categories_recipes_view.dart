@@ -6,11 +6,10 @@ import 'recipe_details_view.dart';
 class CategoryRecipesView extends StatefulWidget {
   final String category;
 
-  const CategoryRecipesView({Key? key, required this.category})
-      : super(key: key);
+  const CategoryRecipesView({super.key, required this.category});
 
   @override
-  _CategoryRecipesViewState createState() => _CategoryRecipesViewState();
+  State<CategoryRecipesView> createState() => _CategoryRecipesViewState();
 }
 
 class _CategoryRecipesViewState extends State<CategoryRecipesView> {
@@ -36,7 +35,6 @@ class _CategoryRecipesViewState extends State<CategoryRecipesView> {
       setState(() {
         isLoading = false;
       });
-      // Tratar erro
     }
   }
 
@@ -47,12 +45,12 @@ class _CategoryRecipesViewState extends State<CategoryRecipesView> {
         title: Text('Categoria: ${widget.category}'),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
-              padding: EdgeInsets.all(8),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.all(8),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.75,
+                childAspectRatio: 1.1,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
               ),
@@ -61,7 +59,6 @@ class _CategoryRecipesViewState extends State<CategoryRecipesView> {
                 Recipe recipe = recipes[index];
                 return GestureDetector(
                   onTap: () async {
-                    // Precisamos buscar os detalhes completos da receita
                     Recipe fullRecipe =
                         await controller.fetchRecipeDetails(recipe.id);
                     Navigator.push(
@@ -79,16 +76,17 @@ class _CategoryRecipesViewState extends State<CategoryRecipesView> {
                         Expanded(
                           child: Image.network(
                             recipe.imageUrl,
-                            fit: BoxFit.cover,
+                            height: 120,
                             width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             recipe.name,
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
                         ),
