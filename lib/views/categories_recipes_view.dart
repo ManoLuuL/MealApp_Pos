@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mealdb_app/components/recipe_card.dart';
 import 'package:mealdb_app/controllers/category_controller.dart';
 import 'package:mealdb_app/models/recipe.dart';
 import 'recipe_details_view.dart';
@@ -46,54 +47,40 @@ class _CategoryRecipesViewState extends State<CategoryRecipesView> {
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
-          : GridView.builder(
+          : ListView.builder(
               padding: const EdgeInsets.all(8),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1.1,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-              ),
               itemCount: recipes.length,
               itemBuilder: (context, index) {
                 Recipe recipe = recipes[index];
                 return GestureDetector(
-                  onTap: () async {
-                    Recipe fullRecipe =
-                        await controller.fetchRecipeDetails(recipe.id);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            RecipeDetailsView(recipe: fullRecipe),
-                      ),
-                    );
-                  },
-                  child: Card(
-                    elevation: 4,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Image.network(
-                            recipe.imageUrl,
-                            height: 120,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                    onTap: () async {
+                      Recipe fullRecipe =
+                          await controller.fetchRecipeDetails(recipe.id);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              RecipeDetailsView(recipe: fullRecipe),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            recipe.name,
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                      );
+                    },
+                    child: RecipeCard(
+                      recipe: recipe,
+                      onTap: () async {
+                        Recipe fullRecipe =
+                            await controller.fetchRecipeDetails(recipe.id);
+
+                        if (mounted) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RecipeDetailsView(recipe: fullRecipe),
+                            ),
+                          );
+                        }
+                      },
+                    ));
               },
             ),
     );

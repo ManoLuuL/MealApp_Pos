@@ -9,12 +9,14 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (_) => FavoritesProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,14 +25,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         fontFamily: 'Roboto',
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -38,10 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const List<String> _titles = ['Receitas', 'Categorias', 'Favoritos'];
 
-  static List<Widget> _screens = <Widget>[
-    RecipeListView(),
-    CategoriesView(),
-    FavoritesView(),
+  final List<Widget> _screens = <Widget>[
+    const RecipeListView(),
+    const CategoriesView(),
+    const FavoritesView(),
   ];
 
   void _onItemTapped(int index) {
