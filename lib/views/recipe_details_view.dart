@@ -50,7 +50,7 @@ class RecipeDetailsView extends StatelessWidget {
                         child: Icon(
                           isFavorite ? Icons.favorite : Icons.favorite_border,
                           color: isFavorite ? Colors.redAccent : Colors.grey,
-                          size: 32,
+                          size: 28,
                         ),
                       ),
                     ),
