@@ -32,6 +32,8 @@ class CategoryController {
           imageUrl: json['strMealThumb'],
           instructions: '',
           ingredients: [],
+          category: category,
+          area: '',
         );
       }).toList();
     } else {

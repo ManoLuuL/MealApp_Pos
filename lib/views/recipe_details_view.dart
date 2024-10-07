@@ -50,7 +50,7 @@ class RecipeDetailsView extends StatelessWidget {
                         child: Icon(
                           isFavorite ? Icons.favorite : Icons.favorite_border,
                           color: isFavorite ? Colors.redAccent : Colors.grey,
-                          size: 28,
+                          size: 24,
                         ),
                       ),
                     ),
@@ -61,27 +61,28 @@ class RecipeDetailsView extends StatelessWidget {
               const Text(
                 'Ingredientes',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Colors.black,
+                  letterSpacing: 1.2,
                 ),
               ),
-              const SizedBox(height: 8),
+              const Divider(color: Colors.grey, height: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: recipe.ingredients.map((ingredient) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(vertical: 6.0),
                     child: Row(
                       children: [
-                        const Icon(Icons.circle, size: 8, color: Colors.grey),
+                        const Icon(Icons.circle, size: 10, color: Colors.green),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             ingredient,
                             style: const TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
                               color: Colors.black87,
                             ),
                           ),
@@ -95,19 +96,54 @@ class RecipeDetailsView extends StatelessWidget {
               const Text(
                 'Instruções',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Colors.black,
+                  letterSpacing: 1.2,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                recipe.instructions,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black87,
-                  height: 1.5,
-                ),
+              const Divider(color: Colors.grey, height: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: recipe.instructions
+                    .split('.')
+                    .where((instruction) => instruction.trim().isNotEmpty)
+                    .map((instruction) {
+                  int index = recipe.instructions
+                          .split('.')
+                          .where((instr) => instr.trim().isNotEmpty)
+                          .toList()
+                          .indexOf(instruction) +
+                      1;
+
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '$index.',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            instruction.trim() + '.',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black87,
+                              height: 1.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
               ),
             ],
           ),

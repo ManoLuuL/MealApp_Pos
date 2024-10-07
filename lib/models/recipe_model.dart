@@ -4,6 +4,8 @@ class Recipe {
   final String imageUrl;
   final String instructions;
   final List<String> ingredients;
+  final String category;
+  final String area;
 
   Recipe({
     required this.id,
@@ -11,6 +13,8 @@ class Recipe {
     required this.imageUrl,
     required this.instructions,
     required this.ingredients,
+    required this.category,
+    required this.area,
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
@@ -26,6 +30,8 @@ class Recipe {
       imageUrl: json['strMealThumb'],
       instructions: json['strInstructions'],
       ingredients: ingredients,
+      category: json['strCategory'],
+      area: json['strArea'],
     );
   }
 }
