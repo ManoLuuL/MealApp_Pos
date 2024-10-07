@@ -27,7 +27,6 @@ class RecipeCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Rounded image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
@@ -38,7 +37,6 @@ class RecipeCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              // Recipe name and details
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +50,6 @@ class RecipeCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    // Displaying category and area from TheMealDB
                     Text(
                       '${recipe.category} • ${recipe.area}',
                       style: TextStyle(
@@ -63,7 +60,6 @@ class RecipeCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Action icon
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
