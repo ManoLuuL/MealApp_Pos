@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:mealdb_app/models/recipe.dart';
+import 'package:mealdb_app/models/recipe_model.dart';
 
 class RecipeController {
   String apiUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';

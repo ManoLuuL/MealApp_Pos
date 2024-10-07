@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mealdb_app/models/category.dart';
+import 'package:mealdb_app/models/category_model.dart';
 
 class CategoryCard extends StatelessWidget {
   final Category category;

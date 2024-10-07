@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:mealdb_app/models/category.dart';
-import 'package:mealdb_app/models/recipe.dart';
+import 'package:mealdb_app/models/category_model.dart';
+import 'package:mealdb_app/models/recipe_model.dart';
 
 class CategoryController {
   static const String categoriesUrl =

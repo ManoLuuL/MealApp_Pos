@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mealdb_app/components/recipe_card.dart';
 import 'package:mealdb_app/providers/favorites_providers.dart';
 import 'package:provider/provider.dart';
-import 'package:mealdb_app/models/recipe.dart';
+import 'package:mealdb_app/models/recipe_model.dart';
 import 'package:mealdb_app/views/recipe_details_view.dart';
 
 class FavoritesView extends StatelessWidget {

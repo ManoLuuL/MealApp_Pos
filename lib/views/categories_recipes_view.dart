@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mealdb_app/components/recipe_card.dart';
-import 'package:mealdb_app/controllers/category_controller.dart';
-import 'package:mealdb_app/models/recipe.dart';
+import 'package:mealdb_app/controllers/categories_controller.dart';
+import 'package:mealdb_app/models/recipe_model.dart';
 import 'recipe_details_view.dart';
 
 class CategoryRecipesView extends StatefulWidget {
